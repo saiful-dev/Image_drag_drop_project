@@ -1,8 +1,8 @@
 .box {
     border: 5px solid rebeccapurple;
     background-color: lightgray;
-    padding: 4px;
-    margin: 40px;
-    width: 300px;
+    padding: 1%;
+    margin: 3%;
+    width: 90%;
     height: 400px;
   }
