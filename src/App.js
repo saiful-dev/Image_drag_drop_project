@@ -7,13 +7,15 @@ import { Grid } from "@mui/material";
 
 import './App.css'
 
+
+
 function App() {
   const [files, setFiles] = useState([]);
   const [files2, setFiles2] = useState([])
 
 
   
-  const { getRootProps:getRootFile1, getInputProps:getInputFile1 } = useDropzone({
+  const { getRootProps:getRootFile1, getInputProps:getInputFile1,isDragActive:dragfile1   } = useDropzone({
     accept: "image/*",
     onDrop: (acceptedFiles) => {
       setFiles(
@@ -27,7 +29,7 @@ function App() {
   
   });
 
-  const { getRootProps:getRootFile2, getInputProps:getInputFile2 } = useDropzone({
+  const { getRootProps:getRootFile2, getInputProps:getInputFile2, isDragActive:dragfile2  } = useDropzone({
     accept: "image/*",
     onDrop: (acceptedFiles) => {
       setFiles2(
@@ -67,14 +69,25 @@ function App() {
 
     <Grid container spacing={2} columns={16}>
 
-      <Grid item xs={8}>
+      <Grid item xs={8} >
+        <section>
           <div className="box">
-              <div {...getRootFile1()}>
-                  <input {...getInputFile1()} />
-                  <button>choose image</button>
-              </div>
-              <div>{images1}</div>
+            <div {...getRootFile1({ className: 'dropzone' })}>
+                <input {...getInputFile1()} />
+
+                <div className="dropArea">
+                  <button>Choose Image</button>
+                  {dragfile1? <p style={{textAlign: 'center',paddingTop: '5%'}}>drop here</p>:<p style={{textAlign: 'center'}}>You can drag & drop Image Here</p>}
+
+                </div>
+
+                <div>
+                  {images1}
+                </div>
+            </div>
           </div>
+        </section>
+          
       </Grid>
 
 
@@ -82,9 +95,18 @@ function App() {
         <div className="box">
             <div {...getRootFile2()}>
                 <input {...getInputFile2()} />
-                <button>choose image</button>
+              
+
+                <div className="dropArea">
+                  <button>Choose Image</button>
+                  {dragfile2? <p style={{textAlign: 'center',paddingTop: '5%'}}>drop here</p>:<p style={{textAlign: 'center'}}>You can drag & drop Image Here</p>}
+
+                </div>
+
+                <div>
+                  {images2}
+                </div>
             </div>
-             <div>{images2}</div>
         </div>
     </Grid>
 

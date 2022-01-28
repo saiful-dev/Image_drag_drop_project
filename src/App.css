@@ -1,8 +1,18 @@
 .box {
-    border: 5px solid rebeccapurple;
+    border: 5px solid rgb(230, 226, 233);
     background-color: lightgray;
     padding: 1%;
     margin: 3%;
     width: 90%;
-    height: 400px;
+    height: 500px;
+    font-size: 25px;
+  }
+
+  .dropArea{
+    border: 5px dotted rebeccapurple;
+    background-color: rgb(148, 133, 133);
+    
+    width: 100%;
+    height: 45%;
+    font-size: 25px;
   }
