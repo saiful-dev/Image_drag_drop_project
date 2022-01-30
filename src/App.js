@@ -1,9 +1,10 @@
-import React, { useState } from "react"
+import React, { useState,useEffect } from "react"
 import { useDropzone } from "react-dropzone"
 import Box from '@mui/material/Box';
 
-
+import axios from "axios";
 import { Grid } from "@mui/material";
+
 
 import './App.css'
 
@@ -12,19 +13,54 @@ import './App.css'
 function App() {
   const [files, setFiles] = useState([]);
   const [files2, setFiles2] = useState([])
+ 
+
+  useEffect(()=>{
+
+   
+    if(files.length !==0 && files.length !==0){
+        const config={headers : {
+            'Content-Type': 'multipart/form-data',
+        }};
+
+      let fd1=new FormData();
+     
+
+     files.map(file=>{
+          fd1.append("source_img",file) 
+      })
+
+    files2.map(file=>{
+          fd1.append("target_img", file)
+      })
 
 
+  axios.post("http://103.87.214.42/api/v1/compare/",fd1,config)
+        .then((res)=>{
+          console.log(res)
+        })
+        .catch((error)=>{
+          console.log(error);
+        })
+
+
+  }
+  },[files && files2]);
   
   const { getRootProps:getRootFile1, getInputProps:getInputFile1,isDragActive:dragfile1   } = useDropzone({
     accept: "image/*",
+    
     onDrop: (acceptedFiles) => {
       setFiles(
         acceptedFiles.map((file) =>
+        
           Object.assign(file, {
             preview: URL.createObjectURL(file),
           })
         )
-      )
+      );
+      
+      
     },
   
   });
@@ -44,26 +80,31 @@ function App() {
   });
 
 
-  
+  const images1 = files.map((file) => {
 
-  
- 
-
-  const images1 = files.map((file) => (
+    
+   return(
     <div key={file.name}>
       <div>
         <img src={file.preview} style={{ width: "50%", height:"200px"}} alt="preview" />
       </div>
     </div>
-  ))
+   )
+   })
 
-  const images2 = files2.map((file) => (
+  const images2 = files2.map((file) => {
+
+  
+    return(
     <div key={file.name}>
       <div>
         <img src={file.preview} style={{ width: "50%", height:"200px"}} alt="preview" />
       </div>
     </div>
-  ))
+    )
+  })
+
+
   return (
     <React.Fragment>
 
@@ -73,7 +114,7 @@ function App() {
         <section>
           <div className="box">
             <div {...getRootFile1({ className: 'dropzone' })}>
-                <input {...getInputFile1()} />
+                <input type="file"  {...getInputFile1()}  />
 
                 <div className="dropArea">
                   <button>Choose Image</button>
@@ -83,6 +124,9 @@ function App() {
 
                 <div>
                   {images1}
+
+                  
+                 
                 </div>
             </div>
           </div>
@@ -94,7 +138,7 @@ function App() {
     <Grid item xs={8}>
         <div className="box">
             <div {...getRootFile2()}>
-                <input {...getInputFile2()} />
+                <input  type="file"  {...getInputFile2()}  />
               
 
                 <div className="dropArea">
@@ -105,6 +149,9 @@ function App() {
 
                 <div>
                   {images2}
+                  
+                  
+                  
                 </div>
             </div>
         </div>
