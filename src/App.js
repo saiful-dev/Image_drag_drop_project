@@ -133,17 +133,18 @@ function App() {
 
   return (
     <React.Fragment>
-    <div>
+    <div style={{marginTop: '2%'}}>
+      <h1 style={{textAlign:'center'}}>Face Recognition</h1>
 
     <Grid container spacing={2} columns={16}>
 
       <Grid item xs={8} >
         <section>
-          <div className="box">
+          <div className="box" >
             <div {...getRootFile1({ className: 'dropzone' })}>
                 <input type="file"  {...getInputFile1()}  />
 
-                <div className="dropArea">
+                <div className="dropArea" style={{ backgroundImage : "url(./img/CameraIcon.png", backgroundRepeat:'no-repeat',backgroundPosition:'center'}}>
                   <button>Choose Image</button>
                   {dragfile1? <p style={{textAlign: 'center',paddingTop: '5%'}}>drop here</p>:<p style={{textAlign: 'center'}}>You can drag & drop Image Here</p>}
 
@@ -168,7 +169,7 @@ function App() {
                 <input  type="file"  {...getInputFile2()}  />
               
 
-                <div className="dropArea">
+                <div className="dropArea" style={{ backgroundImage : "url(./img/CameraIcon.png", backgroundRepeat:'no-repeat',backgroundPosition:'center'}}>
                   <button>Choose Image</button>
                   {dragfile2? <p style={{textAlign: 'center',paddingTop: '5%'}}>drop here</p>:<p style={{textAlign: 'center'}}>You can drag & drop Image Here</p>}
 
