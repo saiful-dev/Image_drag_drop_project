@@ -16,3 +16,14 @@
     height: 45%;
     font-size: 25px;
   }
+
+  .result{
+
+    border: 2px outset rgb(87, 151, 68);
+    background-color: lightblue;    
+    justify-content: space-between;
+    text-align: center;
+    width: 50%;
+    margin-left: 20%;
+    margin-right: 20%;
+  }

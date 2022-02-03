@@ -13,7 +13,10 @@ import './App.css'
 function App() {
   const [files, setFiles] = useState([]);
   const [files2, setFiles2] = useState([])
- 
+  const [id,setID]=useState(null);
+  
+  const [accuracy,setAccuracy]=useState(null);
+  const [isVarified,setIsVarified]=useState(false);
 
   useEffect(()=>{
 
@@ -37,15 +40,38 @@ function App() {
 
   axios.post("http://103.87.214.42/api/v1/compare/",fd1,config)
         .then((res)=>{
-          console.log(res)
+          console.log(res);
+          setID(res.data.id);
+         
         })
         .catch((error)=>{
           console.log(error);
         })
 
 
+       
+        
+
   }
+  
   },[files && files2]);
+
+
+
+  useEffect(()=>{
+    if(id !==null){
+      axios.get("http://103.87.214.42/api/v1/compare/"+ id)
+            .then(res=>{
+              console.log(" get response....................")
+              console.log(res);
+              setAccuracy(res.data.accuracy);
+              setIsVarified(res.data.isVerified)
+
+            })
+        console.log("working...................")
+        console.log(id);
+    }
+  },[id]);
   
   const { getRootProps:getRootFile1, getInputProps:getInputFile1,isDragActive:dragfile1   } = useDropzone({
     accept: "image/*",
@@ -107,6 +133,7 @@ function App() {
 
   return (
     <React.Fragment>
+    <div>
 
     <Grid container spacing={2} columns={16}>
 
@@ -159,7 +186,15 @@ function App() {
 
   </Grid>
 
-    
+  {
+    accuracy ?  
+         <div className='result'>
+         {isVarified ? <img src={require("./ok.jpg")} height={'50px'} width={'50px'}/>: <img src={require("./notOk.jpg")} height={'50px'} width={'50px'}/> }
+         <p fontSize='20px'>Matched by {`${accuracy*100}%`}</p>
+         
+         </div>:null
+  }
+  </div>
    </React.Fragment>
   )
 }
