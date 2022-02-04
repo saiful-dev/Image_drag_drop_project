@@ -21,7 +21,7 @@ function App() {
   useEffect(()=>{
 
    
-    if(files.length !==0 && files.length !==0){
+    if(files.length !==0 && files2.length !==0){
         const config={headers : {
             'Content-Type': 'multipart/form-data',
         }};
@@ -112,7 +112,7 @@ function App() {
    return(
     <div key={file.name}>
       <div>
-        <img src={file.preview} style={{ width: "50%", height:"200px"}} alt="preview" />
+        <img src={file.preview} style={{ width: "50%", height:"200px",display:'block',margin:'auto', paddingTop:'70px'}} alt="preview" />
       </div>
     </div>
    )
@@ -124,11 +124,76 @@ function App() {
     return(
     <div key={file.name}>
       <div>
-        <img src={file.preview} style={{ width: "50%", height:"200px"}} alt="preview" />
+        <img src={file.preview} style={{ width: "50%", height:"200px",display:'block',margin:'auto', paddingTop:'70px'}} alt="preview" />
       </div>
     </div>
     )
   })
+
+
+
+const files1DragDrop=(
+
+  <div {...getRootFile1({ className: 'dropzone' })}>
+    <input type="file"  {...getInputFile1()}  />
+
+    <div className="dropArea" style={{ backgroundImage : "url(./img/plus.png", backgroundRepeat:'no-repeat',backgroundPosition:'center'}}>
+    
+        {dragfile1? <p style={{textAlign: 'center',paddingTop: '5%'}}>drop here</p>:<p style={{textAlign: 'center'}}>You can drag & drop Image Here</p>}
+
+     </div>
+  </div>
+
+)
+
+const fileHandler1=()=>{
+  setFiles([])
+}
+
+const files1Preview=(
+
+  <div>
+      <img onClick={fileHandler1} src={require("./notOk.jpg")}  style={{float: 'right',width: '50px',height:'50px'}}/> 
+
+      <div>
+            {images1}
+      </div>
+  </div>
+
+)
+
+
+
+const files2DragDrop=(
+   
+      <div {...getRootFile2()}>
+      <input  type="file"  {...getInputFile2()}  />
+    
+      <div className="dropArea" style={{ backgroundImage : "url(./img/plus.png", backgroundRepeat:'no-repeat',backgroundPosition:'center' }} >
+      
+        {dragfile2? <p style={{textAlign: 'center',paddingTop: '5%'}}>drop here</p>:<p style={{textAlign: 'center'}}>You can drag & drop Image Here</p>}
+
+      </div>
+      </div>
+    
+)
+
+const fileHandler=()=>{
+  setFiles2([])
+}
+
+const files2Preview=(
+  <div>
+    <img onClick={fileHandler} src={require("./notOk.jpg")}  style={{float: 'right',width: '50px',height:'50px'}}/> 
+
+    <div>
+    
+     {images2}
+    </div>
+  
+  </div>
+  
+)
 
 
   return (
@@ -141,22 +206,10 @@ function App() {
       <Grid item xs={8} >
         <section>
           <div className="box" >
-            <div {...getRootFile1({ className: 'dropzone' })}>
-                <input type="file"  {...getInputFile1()}  />
 
-                <div className="dropArea" style={{ backgroundImage : "url(./img/CameraIcon.png", backgroundRepeat:'no-repeat',backgroundPosition:'center'}}>
-                  <button>Choose Image</button>
-                  {dragfile1? <p style={{textAlign: 'center',paddingTop: '5%'}}>drop here</p>:<p style={{textAlign: 'center'}}>You can drag & drop Image Here</p>}
+            {files.length === 0 ? files1DragDrop : files1Preview}
 
-                </div>
 
-                <div>
-                  {images1}
-
-                  
-                 
-                </div>
-            </div>
           </div>
         </section>
           
@@ -165,24 +218,14 @@ function App() {
 
     <Grid item xs={8}>
         <div className="box">
-            <div {...getRootFile2()}>
-                <input  type="file"  {...getInputFile2()}  />
+
+        {files2.length === 0 ? files2DragDrop : files2Preview}
+
+
+            
+
               
-
-                <div className="dropArea" style={{ backgroundImage : "url(./img/CameraIcon.png", backgroundRepeat:'no-repeat',backgroundPosition:'center'}}>
-                  <button>Choose Image</button>
-                  {dragfile2? <p style={{textAlign: 'center',paddingTop: '5%'}}>drop here</p>:<p style={{textAlign: 'center'}}>You can drag & drop Image Here</p>}
-
-                </div>
-
-                <div>
-                  {images2}
-                  
-                  
-                  
-                </div>
-            </div>
-        </div>
+       </div> 
     </Grid>
 
   </Grid>
