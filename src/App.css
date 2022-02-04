@@ -1,3 +1,9 @@
+body{
+
+  margin-left: 10%;
+  margin-right: 10%;
+}
+
 .box {
     border: 5px solid rgb(230, 226, 233);
     background-color: lightgray;
@@ -19,15 +25,72 @@
     width: 96%;
     height: 92%;
     font-size: 25px;
+    background-size: 35%;
   }
 
   .result{
 
     border: 2px outset rgb(87, 151, 68);
     background-color: lightblue;    
-    justify-content: space-between;
-    text-align: center;
+    position: relative;
+    display: flex;
+    justify-content: center;
+    align-items: center;
     width: 50%;
-    margin-left: 20%;
-    margin-right: 20%;
+    height: 100px;
+    margin: auto;
+    
+   
+ 
+  }
+
+  
+  
+  .result p{
+   
+    padding-left: 10px;
+
+   
+    
+    
+  }
+
+  @media screen and (max-width: 600px){
+
+    body{
+
+     margin:2%;
+    }
+
+    .box {
+      border: 2px solid rgb(230, 226, 233);
+      background-color: lightgray;
+      position: relative;
+      padding: 1%;
+      margin: 1%;
+      width: 98%;
+      height: 350px;
+      font-size: 12px;
+    }
+
+
+    .dropArea{
+      border: 2px dotted rebeccapurple;
+      background-color: rgb(248, 242, 242);
+      position: absolute;
+      margin-top: 2%;
+      margin-left: 1%;
+      width: 96%;
+      height: 92%;
+      font-size: 25px;
+      
+    }
+
+    
+      .result{
+        width: 80%;
+        
+      }
+
+
   }

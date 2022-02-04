@@ -233,8 +233,8 @@ const files2Preview=(
   {
     accuracy ?  
          <div className='result'>
-         {isVarified ? <img src={require("./ok.jpg")} height={'50px'} width={'50px'}/>: <img src={require("./notOk.jpg")} height={'50px'} width={'50px'}/> }
-         <p fontSize='20px'>Matched by {`${accuracy*100}%`}</p>
+         {isVarified ? <img src={require("./ok.jpg")} height={'50px'} width={'50px'} />: <img src={require("./notOk.jpg")} height={'50px'} width={'50px'}/> }
+         <p fontSize='20px'>Matched by {`${Math.round(accuracy*100)}%`}</p>
          
          </div>:null
   }
