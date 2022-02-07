@@ -1,11 +1,12 @@
 import React, { useState,useEffect } from "react"
 import { useDropzone } from "react-dropzone"
-import Box from '@mui/material/Box';
+
 
 import axios from "axios";
 import { Grid } from "@mui/material";
 
-
+import CircularProgress from '@mui/material/CircularProgress';
+import Box from '@mui/material/Box';
 import './App.css'
 
 
@@ -38,7 +39,7 @@ function App() {
       })
 
 
-  axios.post("http://103.87.214.42/api/v1/compare/",fd1,config)
+  axios.post("https://frapi.sabbir.dev/api/v1/compare/",fd1,config)
         .then((res)=>{
           console.log(res);
           setID(res.data.id);
@@ -54,13 +55,15 @@ function App() {
 
   }
   
-  },[files && files2]);
+  },[files,files2]);
 
 
 
   useEffect(()=>{
     if(id !==null){
-      axios.get("http://103.87.214.42/api/v1/compare/"+ id)
+
+      
+      axios.get("https://frapi.sabbir.dev/api/v1/compare/"+ id)
             .then(res=>{
               console.log(" get response....................")
               console.log(res);
@@ -231,12 +234,24 @@ const files2Preview=(
   </Grid>
 
   {
-    accuracy ?  
-         <div className='result'>
+
+    
+
+    accuracy && files.length !==0 && files2.length !==0 ?  
+         (<div className='result'>
          {isVarified ? <img src={require("./ok.jpg")} height={'50px'} width={'50px'} />: <img src={require("./notOk.jpg")} height={'50px'} width={'50px'}/> }
          <p fontSize='20px'>Matched by {`${Math.round(accuracy*100)}%`}</p>
          
-         </div>:null
+         </div>): (files.length !==0 && files2.length !==0)? (
+          <div className='result'>
+            <CircularProgress />
+          </div>
+          
+        ) :null
+
+         
+
+                          
   }
   </div>
    </React.Fragment>
